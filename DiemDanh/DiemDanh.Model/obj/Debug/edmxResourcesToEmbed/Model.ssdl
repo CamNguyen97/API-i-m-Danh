@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiemDanh.APIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DiaDanh">
+    <Key>
+      <PropertyRef Name="Ngay" />
+    </Key>
+    <Property Name="Ngay" Type="datetime" Nullable="false" />
+    <Property Name="MaMon" Type="int" Nullable="false" />
+    <Property Name="MaSV" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="DiMuon" Type="bit" Nullable="false" />
+    <Property Name="DiHoc" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lop">
+    <Key>
+      <PropertyRef Name="MaLop" />
+    </Key>
+    <Property Name="MaLop" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="NamHoc" Type="int" />
+    <Property Name="MaKhoaHoc" Type="int" />
+  </EntityType>
+  <EntityType Name="MonHoc">
+    <Key>
+      <PropertyRef Name="MaMon" />
+    </Key>
+    <Property Name="MaMon" Type="int" Nullable="false" />
+    <Property Name="TenMon" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SinhVien">
+    <Key>
+      <PropertyRef Name="MaSV" />
+    </Key>
+    <Property Name="MaSV" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="DienThoai" Type="nvarchar" MaxLength="200" />
+    <Property Name="MaLop" Type="nvarchar" MaxLength="12" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_DiaDanh_MonHoc">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+    <End Role="DiaDanh" Type="Self.DiaDanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="MaMon" />
+      </Principal>
+      <Dependent Role="DiaDanh">
+        <PropertyRef Name="MaMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiaDanh_SinhVien">
+    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+    <End Role="DiaDanh" Type="Self.DiaDanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="DiaDanh">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lop_MonHoc">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+    <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="MaMon" />
+      </Principal>
+      <Dependent Role="Lop">
+        <PropertyRef Name="MaKhoaHoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SinhVien_Lop">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="1" />
+    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="MaLop" />
+      </Principal>
+      <Dependent Role="SinhVien">
+        <PropertyRef Name="MaLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DiemDanhAPIModelStoreContainer">
+    <EntitySet Name="DiaDanh" EntityType="Self.DiaDanh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lop" EntityType="Self.Lop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DiaDanh_MonHoc" Association="Self.FK_DiaDanh_MonHoc">
+      <End Role="MonHoc" EntitySet="MonHoc" />
+      <End Role="DiaDanh" EntitySet="DiaDanh" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiaDanh_SinhVien" Association="Self.FK_DiaDanh_SinhVien">
+      <End Role="SinhVien" EntitySet="SinhVien" />
+      <End Role="DiaDanh" EntitySet="DiaDanh" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lop_MonHoc" Association="Self.FK_Lop_MonHoc">
+      <End Role="MonHoc" EntitySet="MonHoc" />
+      <End Role="Lop" EntitySet="Lop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SinhVien_Lop" Association="Self.FK_SinhVien_Lop">
+      <End Role="Lop" EntitySet="Lop" />
+      <End Role="SinhVien" EntitySet="SinhVien" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

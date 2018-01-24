@@ -14,6 +14,5 @@ E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\bin\Debug\Newtonsoft.J
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\bin\Debug\System.Net.Http.Formatting.xml
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\bin\Debug\System.Web.Http.xml
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\bin\Debug\System.Web.Http.Cors.xml
-E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\obj\Debug\DiemDanh.Entity.csprojResolveAssemblyReference.cache
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\obj\Debug\DiemDanh.Entity.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.Entity\obj\Debug\DiemDanh.Entity.pdb

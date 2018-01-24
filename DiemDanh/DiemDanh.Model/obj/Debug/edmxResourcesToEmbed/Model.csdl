@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiemDanh.APIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DiaDanh">
+    <Key>
+      <PropertyRef Name="Ngay" />
+    </Key>
+    <Property Name="Ngay" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MaMon" Type="Int32" Nullable="false" />
+    <Property Name="MaSV" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiMuon" Type="Boolean" Nullable="false" />
+    <Property Name="DiHoc" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MonHoc" Relationship="Self.FK_DiaDanh_MonHoc" FromRole="DiaDanh" ToRole="MonHoc" />
+    <NavigationProperty Name="SinhVien" Relationship="Self.FK_DiaDanh_SinhVien" FromRole="DiaDanh" ToRole="SinhVien" />
+  </EntityType>
+  <EntityType Name="Lop">
+    <Key>
+      <PropertyRef Name="MaLop" />
+    </Key>
+    <Property Name="MaLop" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NamHoc" Type="Int32" />
+    <Property Name="MaKhoaHoc" Type="Int32" />
+    <NavigationProperty Name="MonHoc" Relationship="Self.FK_Lop_MonHoc" FromRole="Lop" ToRole="MonHoc" />
+    <NavigationProperty Name="SinhViens" Relationship="Self.FK_SinhVien_Lop" FromRole="Lop" ToRole="SinhVien" />
+  </EntityType>
+  <EntityType Name="MonHoc">
+    <Key>
+      <PropertyRef Name="MaMon" />
+    </Key>
+    <Property Name="MaMon" Type="Int32" Nullable="false" />
+    <Property Name="TenMon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DiaDanhs" Relationship="Self.FK_DiaDanh_MonHoc" FromRole="MonHoc" ToRole="DiaDanh" />
+    <NavigationProperty Name="Lops" Relationship="Self.FK_Lop_MonHoc" FromRole="MonHoc" ToRole="Lop" />
+  </EntityType>
+  <EntityType Name="SinhVien">
+    <Key>
+      <PropertyRef Name="MaSV" />
+    </Key>
+    <Property Name="MaSV" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MaLop" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DiaDanhs" Relationship="Self.FK_DiaDanh_SinhVien" FromRole="SinhVien" ToRole="DiaDanh" />
+    <NavigationProperty Name="Lop" Relationship="Self.FK_SinhVien_Lop" FromRole="SinhVien" ToRole="Lop" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_DiaDanh_MonHoc">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+    <End Role="DiaDanh" Type="Self.DiaDanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="MaMon" />
+      </Principal>
+      <Dependent Role="DiaDanh">
+        <PropertyRef Name="MaMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiaDanh_SinhVien">
+    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+    <End Role="DiaDanh" Type="Self.DiaDanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="DiaDanh">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lop_MonHoc">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+    <End Role="Lop" Type="Self.Lop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="MaMon" />
+      </Principal>
+      <Dependent Role="Lop">
+        <PropertyRef Name="MaKhoaHoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SinhVien_Lop">
+    <End Role="Lop" Type="Self.Lop" Multiplicity="1" />
+    <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lop">
+        <PropertyRef Name="MaLop" />
+      </Principal>
+      <Dependent Role="SinhVien">
+        <PropertyRef Name="MaLop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DiemDanhEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DiaDanhs" EntityType="Self.DiaDanh" />
+    <EntitySet Name="Lops" EntityType="Self.Lop" />
+    <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
+    <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_DiaDanh_MonHoc" Association="Self.FK_DiaDanh_MonHoc">
+      <End Role="MonHoc" EntitySet="MonHocs" />
+      <End Role="DiaDanh" EntitySet="DiaDanhs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiaDanh_SinhVien" Association="Self.FK_DiaDanh_SinhVien">
+      <End Role="SinhVien" EntitySet="SinhViens" />
+      <End Role="DiaDanh" EntitySet="DiaDanhs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lop_MonHoc" Association="Self.FK_Lop_MonHoc">
+      <End Role="MonHoc" EntitySet="MonHocs" />
+      <End Role="Lop" EntitySet="Lops" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SinhVien_Lop" Association="Self.FK_SinhVien_Lop">
+      <End Role="Lop" EntitySet="Lops" />
+      <End Role="SinhVien" EntitySet="SinhViens" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

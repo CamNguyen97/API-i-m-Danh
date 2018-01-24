@@ -1,3 +1,4 @@
+E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AspNet.Identity.Core.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\ApplicationInsights.config
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\roslyn\csc.exe
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -26,7 +27,6 @@ E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AI.ServerTe
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AI.Web.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AI.WindowsServer.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.ApplicationInsights.dll
-E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AspNet.Identity.Core.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.AspNet.Identity.Owin.dll
 E:\API Điểm Danh\API-i-m-Danh\DiemDanh\DiemDanh.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
