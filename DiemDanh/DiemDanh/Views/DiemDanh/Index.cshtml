@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    
+<script src="~/Content/angular.min.js"></script>
+    }
+<h2>Index</h2>
+
+<div ng-app="MyApp"  ng-controller="MyController">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã sinh viên</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Đi muộn</th>
+                <th>Đi học</th>
+            </tr>
+        </thead>
+        <tbody class="Table-DiemDanh">
+            <tr ng-repeat="item in DuLieu">
+                <th ng-model="$index">{{$index}}</th>
+                <th>{{item.SinhVien.MaSV}}</th>
+                <th>{{item.SinhVien.HoTen}}</th>
+                <th>{{item.SinhVien.Email}}</th>
+                <th><input type="radio" name="{{$index}}" ng-model="Check1"></th>
+                <th><input type="radio" name="{{$index}}" ng-model="Check"></th>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" ng-click="Save()">Save</button>
+</div>
+@section scripts{
+    <script>
+        var app = angular.module("MyApp", []);
+        app.controller("MyController", function ($scope, $http) {
+            $scope.LoadDuLieu = function () {
+                $http.get("http://localhost:8081/api/DiemDanh/GetAll").then(function (resp) {
+                    $scope.DuLieu = resp.data;
+                   // console.log($scope.DuLieu.length);
+                });
+            }
+            $scope.LoadDuLieu();
+            $scope.Save = function () {
+                //var arr = new Array();
+                //$scope.obj = {
+                //    MaSV :$index
+                //}
+                ////for (var i = 0; i < $scope.DuLieu.length; i++) {
+                ////    arr.push();
+                ////}
+                //console.log($scope.obj);
+            }
+        });
+    </script>    
+}
+
