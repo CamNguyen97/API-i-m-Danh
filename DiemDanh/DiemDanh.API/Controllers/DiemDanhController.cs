@@ -30,7 +30,7 @@ namespace DiemDanh.API.Controllers
                            join Lop in db.Lops.Where(x => x.MaLop.Contains("2")) on SV.MaLop equals Lop.MaLop
                            join MH in db.MonHocs
     on Lop.MaKhoaHoc equals MH.MaMon
-                           where (Lop.NamHoc == DateTime.Now.Year)
+                           where (Lop.NamHoc == DateTime.Now.Year) orderby SV.MaSV ascending 
                            select new { SinhVien = SV,MonHocs = MH };
                 return JToken.FromObject(list);
            // }

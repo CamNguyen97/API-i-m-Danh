@@ -24,7 +24,7 @@
         <tbody class="Table-DiemDanh">
             <tr ng-repeat="item in DuLieu">
                 <th ng-model="$index">{{$index}}</th>
-                <th>{{item.SinhVien.MaSV}}</th>
+                <th ng-model="item.SinhVien.MaSV">{{item.SinhVien.MaSV}}</th>
                 <th>{{item.SinhVien.HoTen}}</th>
                 <th>{{item.SinhVien.Email}}</th>
                 <th><input type="radio" name="{{$index}}" ng-model="Check1"></th>
@@ -47,13 +47,14 @@
             $scope.LoadDuLieu();
             $scope.Save = function () {
                 //var arr = new Array();
-                //$scope.obj = {
-                //    MaSV :$index
-                //}
+                $scope.obj = {
+                    data: $scope.DuLieu,
+                    DiMuon : $scope.Check1
+                }
                 ////for (var i = 0; i < $scope.DuLieu.length; i++) {
                 ////    arr.push();
                 ////}
-                //console.log($scope.obj);
+                console.log($scope.Check    );
             }
         });
     </script>    
